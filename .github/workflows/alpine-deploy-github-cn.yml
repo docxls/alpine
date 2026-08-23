@@ -6,7 +6,7 @@
 # Nuxt 部署 GitHub Pages
 
 # .github/workflows/alpine-deploy-github-cn.yml
-name: nuxt-deploy-github-cn
+name: alpine-deploy-github-cn
 
 on:
   workflow_dispatch:
@@ -27,7 +27,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+          # 改为 20 LTS，24 可能不稳定
           node-version: "24"
+          # 添加缓存
+          cache: 'pnpm'
       
       - name: Install dependencies
         # run: npm install
@@ -42,7 +45,7 @@ jobs:
       
       - name: Generate static site
         # run: npm run generate
-        run: pnpm run generate
+        run: pnpm generate
       
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
